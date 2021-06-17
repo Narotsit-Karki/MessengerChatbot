@@ -6,17 +6,17 @@ from nltk.chat.eliza import pairs
 
 
 app = Flask(__name__)
-ACCESS_TOKEN = 'token obtained from your facebook app'
-
+ACCESS_TOKEN = 'token provided by facebook'
 VERIFY_TOKEN = 'your private token'
 bot = Bot(ACCESS_TOKEN)
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/chatbot", methods=['GET', 'POST'])
 def receive_message():
     if request.method == 'GET':
-        token = request.args.get("hub.verify_token")
-        return verify_the_token(token)
+        if request.args.get("hub.mode")  == 'subscribe':
+             token = request.args.get("hub.verify_token")
+             return verify_the_token(token)
     else:
         output = request.get_json()
         entry_got = output['entry']
@@ -41,9 +41,11 @@ def receive_message():
 
 def verify_the_token(token):
     if token == VERIFY_TOKEN:
-        return request.args.get("hub.challenge")
-    else:
-        return 'Invalid token'
+        response = request.args.get("hub.challenge")
+        return response
+    else: 
+        return "Invalid token"
+
 
 
 def get_non_text_message():
