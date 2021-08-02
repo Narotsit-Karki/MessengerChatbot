@@ -6,7 +6,7 @@ from nltk.chat.eliza import pairs
 
 
 app = Flask(__name__)
-ACCESS_TOKEN = 'token provided by facebook'
+ACCESS_TOKEN = 'Token provided by facebook'
 VERIFY_TOKEN = 'your private token'
 bot = Bot(ACCESS_TOKEN)
 
@@ -34,7 +34,7 @@ def receive_message():
                     send_message(recipient_id,message_send)
 
             except KeyError:
-                print("\n [*] Key value not found...")
+                pass
 
     return "Message Processed"
 
