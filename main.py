@@ -16,7 +16,7 @@ def receive_message():
     if request.method == 'GET':
         if request.args.get("hub.mode")  == 'subscribe':
              token = request.args.get("hub.verify_token")
-             return verify_the_token(token)
+             return verify_the_token(escape(token))
     else:
         output = request.get_json()
         entry_got = output['entry']
