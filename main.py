@@ -1,5 +1,5 @@
 """ A Simple Messenger Chat Bot"""
-from flask import Flask, request
+from flask import Flask, request, escape
 from pymessenger import Bot
 from nltk.chat.util import Chat, reflections
 from nltk.chat.eliza import pairs 
